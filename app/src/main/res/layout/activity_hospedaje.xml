@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/hospedaje_foto"
         android:layout_width="match_parent"
+        android:layout_marginTop="01dp"
         android:layout_height="172dp"
         android:layout_weight="0.32"
         app:srcCompat="@drawable/bayas" />
