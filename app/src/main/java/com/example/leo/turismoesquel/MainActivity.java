@@ -1,5 +1,6 @@
 package com.example.leo.turismoesquel;
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -8,11 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,9 +26,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ListViewAdapter adapter;
 
-    //IP de mi URL
-    String IP = "https://julioale1981.000webhostapp.com";
+    ArrayList<Hotel>lista;
 
+    //IP de mi URL
+    String IP ="https://julioale1981.000webhostapp.com";
     String GET = IP + "/obtener_hoteles.php";
     String IMAGENES = IP + "/img2/";
 
@@ -40,19 +40,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         hiloconexion = new ObtenerWebService();
         hiloconexion.execute(GET, "1");
-
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        /*Intent seleccion = new Intent(MainActivity.this, hospedaje_Activity.class);
-        seleccion.putExtra("titulos", titulos[position]);
-        seleccion.putExtra("contenidos", contenidos[position]);
-        seleccion.putExtra("imagenes", imagenes[position]);
-        startActivity(seleccion);*/
+
+
     }
 
 
@@ -60,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         private ArrayList<Hotel> list = new ArrayList<>();
+
 
         Bitmap bitmap;
 
@@ -72,9 +70,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         protected void onPostExecute(ArrayList<Hotel> s) {
 
+            final ArrayList<Hotel> list = new ArrayList<>(s);
+
             ListView lista = (ListView) findViewById(R.id.hospedajes);
             adapter = new ListViewAdapter(getApplicationContext(), s);
             lista.setAdapter(adapter);
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent seleccion = new Intent(MainActivity.this, hospedaje_Activity.class);
+                    seleccion.putExtra("hospedajes", list.get(position).getNombre());
+                    seleccion.putExtra("contenidos", list.get(position).getDescripcion());
+                    seleccion.putExtra("imagenes", list.get(position).getImagen_portada());
+                    startActivity(seleccion);
+                }
+            });
+
         }
 
         @Override
@@ -86,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         protected void onCancelled(ArrayList<Hotel> s) {
             super.onCancelled(s);
         }
+
 
         @Override
         protected ArrayList<Hotel> doInBackground(String... params) {
