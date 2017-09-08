@@ -9,24 +9,24 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 public class ListViewAdapter extends BaseAdapter {
     // Declare Variables
     Context context;
-    int[] imagenes;
-    String[] titulos;
-    String[] contenido;
+    ArrayList<Hotel> lista;
     LayoutInflater inflater;
 
-    public ListViewAdapter(Context context, int[] imagenes, String[] titulos, String[] contenido ) {
+    public ListViewAdapter(Context context, ArrayList<Hotel> lista ) {
         this.context = context;
-        this.imagenes = imagenes;
-        this.titulos = titulos;
-        this.contenido = contenido;
+        this.lista = lista;
     }
 
     @Override
     public int getCount() {
-        return titulos.length;
+        return lista.size();
     }
 
     @Override
@@ -57,9 +57,10 @@ public class ListViewAdapter extends BaseAdapter {
         txtContenido = (TextView) itemView.findViewById(R.id.descripcion);
 
         // Capture position and set to the TextViews
-        imgImg.setImageResource(imagenes[position]);
-        txtTitle.setText(titulos[position]);
-        txtContenido.setText(contenido[position]);
+
+        Picasso.with(this.context).load(lista.get(position ).getImagen_portada());
+        txtTitle.setText(lista.get(position).getNombre());
+        txtContenido.setText(lista.get(position).getDireccion());
 
         return itemView;
     }
