@@ -35,18 +35,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ObtenerWebService hiloconexion;
 
-
-    String[] titulos = new String[]{
-
-            "Hotel Sol del Sur",
-            "Las Bayas Hotel",
-            "Cumbres Blancas",
-            "El Coiron",
-            "Hotel Sol del Sur"
-
-    };
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
