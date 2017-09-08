@@ -19,6 +19,10 @@ public class ListViewAdapter extends BaseAdapter {
     ArrayList<Hotel> lista;
     LayoutInflater inflater;
 
+    String IP = "https://julioale1981.000webhostapp.com";
+
+    String IMAGENES = IP + "/img2/";
+
     public ListViewAdapter(Context context, ArrayList<Hotel> lista ) {
         this.context = context;
         this.lista = lista;
@@ -58,9 +62,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         // Capture position and set to the TextViews
 
-        Picasso.with(this.context).load(lista.get(position ).getImagen_portada());
+        Picasso.with(this.context).load(IMAGENES + lista.get(position).getImagen_portada()).into(imgImg);
         txtTitle.setText(lista.get(position).getNombre());
-        txtContenido.setText(lista.get(position).getDireccion());
+        txtContenido.setText(lista.get(position).getDescripcion_breve());
 
         return itemView;
     }

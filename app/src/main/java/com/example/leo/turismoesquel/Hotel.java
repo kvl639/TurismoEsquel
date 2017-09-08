@@ -8,6 +8,8 @@ public class Hotel {
 
     private int id;
     private String nombre;
+    private String descripcion_breve;
+    private String descripcion;
     private String direccion;
     private String telefono;
     private String mail;
@@ -66,12 +68,28 @@ public class Hotel {
         return imagen1;
     }
 
+    public String getDescripcion_breve() {
+        return descripcion_breve;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
     public String getImagen2() {
         return imagen2;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setDescripcion_breve(String descripcion_breve) {
+        this.descripcion_breve = descripcion_breve;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void setNombre(String nombre) {
